@@ -1,0 +1,2651 @@
+[
+    {
+        "id": "5b7e7e8c3aa6bde5",
+        "type": "tab",
+        "label": "Flow - SmartDispenser",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d49302d157671510",
+        "type": "mqtt in",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "topic": "SmartDispenser/envio/mqtt",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "fcb06e8f269271e9",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "3d1f8845f4f78fc3"
+            ]
+        ]
+    },
+    {
+        "id": "3d1f8845f4f78fc3",
+        "type": "json",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 346,
+        "y": 110,
+        "wires": [
+            [
+                "0985d7dd1a21ed2e",
+                "ae91e63366b80afd",
+                "ab8db9c21ad35469",
+                "48a0ada007867220"
+            ]
+        ]
+    },
+    {
+        "id": "8145b7bc9abe1c94",
+        "type": "ui_text",
+        "z": "5b7e7e8c3aa6bde5",
+        "group": "1250892ebf72c086",
+        "order": 2,
+        "width": 4,
+        "height": 1,
+        "name": "",
+        "label": "Smart Dispenser 1.0",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 480,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "ab8db9c21ad35469",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "id",
+        "func": "msg.payload = msg.payload.id\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 512,
+        "y": 88,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0985d7dd1a21ed2e",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Temperatura",
+        "func": "msg.payload = msg.payload.temp;\nglobal.set (\"tempSD\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 532,
+        "y": 132,
+        "wires": [
+            [
+                "87cc4f961c3283e3",
+                "31a90aa93779722d"
+            ]
+        ]
+    },
+    {
+        "id": "ae91e63366b80afd",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Humedad",
+        "func": "msg.payload = msg.payload.hum;\nglobal.set (\"humSD\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 522,
+        "y": 176,
+        "wires": [
+            [
+                "8107c893da08a460",
+                "31a90aa93779722d"
+            ]
+        ]
+    },
+    {
+        "id": "87cc4f961c3283e3",
+        "type": "ui_text",
+        "z": "5b7e7e8c3aa6bde5",
+        "group": "1250892ebf72c086",
+        "order": 4,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "Temperatura",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 810,
+        "y": 132,
+        "wires": []
+    },
+    {
+        "id": "8107c893da08a460",
+        "type": "ui_text",
+        "z": "5b7e7e8c3aa6bde5",
+        "group": "1250892ebf72c086",
+        "order": 6,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "Humedad",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 798,
+        "y": 176,
+        "wires": []
+    },
+    {
+        "id": "d3108d2308a77f11",
+        "type": "mqtt in",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "topic": "SmartDispenser/indices/mqtt",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "bcd3ae9b12fd9abf",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 380,
+        "wires": [
+            [
+                "d17913572e56eb1d",
+                "f576882abc79a8ba",
+                "de24a2ffa75ab9b5"
+            ]
+        ]
+    },
+    {
+        "id": "d17913572e56eb1d",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Detector HR",
+        "func": "if (msg.payload.hrv == 1) {\n    msg.payload = msg.payload.hr;\n    global.set(\"bpm\", msg.payload);\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 374,
+        "wires": [
+            [
+                "1e9f96e087cda6c3"
+            ]
+        ]
+    },
+    {
+        "id": "f576882abc79a8ba",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Detector SPO2",
+        "func": "if (msg.payload.spo2v == 1) {\n    msg.payload = msg.payload.spo2;\n    global.set(\"sp02\", msg.payload);\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 476,
+        "y": 418,
+        "wires": [
+            [
+                "13c5ea2cb4479c1c"
+            ]
+        ]
+    },
+    {
+        "id": "de24a2ffa75ab9b5",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Detector de TIR",
+        "func": "msg.payload = msg.payload.tir;\nglobal.set(\"temp\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 476,
+        "y": 462,
+        "wires": [
+            [
+                "526b5362535830cc"
+            ]
+        ]
+    },
+    {
+        "id": "1e9f96e087cda6c3",
+        "type": "ui_gauge",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "group": "9f99164f1a81d407",
+        "order": 2,
+        "width": 4,
+        "height": 2,
+        "gtype": "gage",
+        "title": "Ritmo Cardiaco",
+        "label": "Latidos x min",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "120",
+        "colors": [
+            "#cc0000",
+            "#00b500",
+            "#a40000"
+        ],
+        "seg1": "60",
+        "seg2": "85",
+        "diff": false,
+        "className": "",
+        "x": 844,
+        "y": 374,
+        "wires": []
+    },
+    {
+        "id": "13c5ea2cb4479c1c",
+        "type": "ui_gauge",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "group": "9f99164f1a81d407",
+        "order": 3,
+        "width": 4,
+        "height": 2,
+        "gtype": "wave",
+        "title": "Oxigenación (SpO2)",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 848,
+        "y": 418,
+        "wires": []
+    },
+    {
+        "id": "526b5362535830cc",
+        "type": "ui_gauge",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "group": "9f99164f1a81d407",
+        "order": 1,
+        "width": 4,
+        "height": 2,
+        "gtype": "donut",
+        "title": "Temperatura",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "30",
+        "max": "39",
+        "colors": [
+            "#729fcf",
+            "#00b500",
+            "#ca3838"
+        ],
+        "seg1": "35",
+        "seg2": "36.5",
+        "diff": false,
+        "className": "",
+        "x": 830,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "07bda62ea436f525",
+        "type": "ui_text_input",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "label": "Nombre del Paciente",
+        "tooltip": "Solo tu nombre",
+        "group": "f0e74099d1811fac",
+        "order": 1,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 160,
+        "y": 840,
+        "wires": [
+            [
+                "a0fa56f70e30be18"
+            ]
+        ]
+    },
+    {
+        "id": "ea3f50a49c5abc1d",
+        "type": "ui_text_input",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "label": "Edad",
+        "tooltip": "",
+        "group": "f0e74099d1811fac",
+        "order": 3,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 110,
+        "y": 920,
+        "wires": [
+            [
+                "f0d88ffa2194171b"
+            ]
+        ]
+    },
+    {
+        "id": "a0fa56f70e30be18",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Nombre del Paciente",
+        "func": "global.set(\"paciente\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f0d88ffa2194171b",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Edad",
+        "func": "global.set(\"edad\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fae579634fdb548a",
+        "type": "ui_text_input",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "label": "Padecimientos",
+        "tooltip": "",
+        "group": "f0e74099d1811fac",
+        "order": 4,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 140,
+        "y": 960,
+        "wires": [
+            [
+                "1e9b8f10a953206b"
+            ]
+        ]
+    },
+    {
+        "id": "1e9b8f10a953206b",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Padecimientos",
+        "func": "global.set(\"padecimientos\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "57be6a8666e9533f",
+        "type": "ui_text_input",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "label": "Correo Electrónico",
+        "tooltip": "",
+        "group": "f0e74099d1811fac",
+        "order": 5,
+        "width": 6,
+        "height": 1,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 150,
+        "y": 1000,
+        "wires": [
+            [
+                "e1a70850d4a7b131"
+            ]
+        ]
+    },
+    {
+        "id": "e1a70850d4a7b131",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "email",
+        "func": "global.set(\"email\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "49cb31e0315dc956",
+        "type": "ui_text_input",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "label": "Nombre Medicamento",
+        "tooltip": "",
+        "group": "e97a3b2eeacbe92b",
+        "order": 1,
+        "width": 5,
+        "height": 1,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 160,
+        "y": 1160,
+        "wires": [
+            [
+                "cf592ef81941be03"
+            ]
+        ]
+    },
+    {
+        "id": "cf592ef81941be03",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Medicamentos",
+        "func": "global.set(\"medicamentos\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 1160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "49be38561b509765",
+        "type": "ui_text_input",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "label": "Cantidad",
+        "tooltip": "",
+        "group": "e97a3b2eeacbe92b",
+        "order": 5,
+        "width": 5,
+        "height": 1,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 120,
+        "y": 1240,
+        "wires": [
+            [
+                "eb1d463ae16882ae"
+            ]
+        ]
+    },
+    {
+        "id": "3d48be571a785783",
+        "type": "ui_dropdown",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "label": "Presentación",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "e97a3b2eeacbe92b",
+        "order": 3,
+        "width": 5,
+        "height": 1,
+        "passthru": true,
+        "multiple": true,
+        "options": [
+            {
+                "label": "Capsula",
+                "value": "capsula",
+                "type": "str"
+            },
+            {
+                "label": "Tableta",
+                "value": "Tableta",
+                "type": "str"
+            },
+            {
+                "label": "Jarabe",
+                "value": "Jarabe",
+                "type": "str"
+            },
+            {
+                "label": "Inyectable",
+                "value": "Inyectable",
+                "type": "str"
+            },
+            {
+                "label": "Inhalador",
+                "value": "Inhalador",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 130,
+        "y": 1200,
+        "wires": [
+            [
+                "b02ff72cbe6447e2"
+            ]
+        ]
+    },
+    {
+        "id": "b02ff72cbe6447e2",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Presentación",
+        "func": "global.set(\"presentacion\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 1200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eb1d463ae16882ae",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Cantidad",
+        "func": "global.set(\"cantidad\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 1240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5e18dade249a1605",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Horario",
+        "func": "global.set(\"horario\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 1280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "884dcf5a6ec2710d",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Dias",
+        "func": "global.set(\"dias\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 1320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4060ada004fc17b2",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Información Personal",
+        "info": "",
+        "x": 160,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "7919b1119d578989",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Guardar Tratamiento del Paciente",
+        "info": "",
+        "x": 190,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "3ba8af2bb2204e99",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Indices vitales del Paciente",
+        "info": "",
+        "x": 150,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "598e65ce6cb98eed",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Estado del Ambiente del Dispensador",
+        "info": "",
+        "x": 190,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "08a1fc99aec581c6",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Confirmar1",
+        "func": "if (msg.payload == false) {\n    msg.payload = \"Bien hecho, hasta la proxima dosis\";\n    }\nif(msg.payload == true){\n    msg.payload = \"Recuerda, que tu buena salud, depende de tus medicamentos\";\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 620,
+        "wires": [
+            [
+                "3804a82dfa6f7945"
+            ]
+        ]
+    },
+    {
+        "id": "3804a82dfa6f7945",
+        "type": "ui_audio",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "group": "2739d27ccc7b1a26",
+        "voice": "",
+        "always": "",
+        "x": 680,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "26b92107e7af20bb",
+        "type": "mysql",
+        "z": "5b7e7e8c3aa6bde5",
+        "mydb": "8d3edaa2d96de089",
+        "name": "",
+        "x": 800,
+        "y": 1100,
+        "wires": [
+            [
+                "46ea99df38a052e8"
+            ]
+        ]
+    },
+    {
+        "id": "44382f909a181555",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Query guardar datos paciente",
+        "func": "msg.topic = \"INSERT INTO infoper (`nombre`,`apellidos`,`edad`,`padecimientos`,`correo`) VALUES ('\" + global.get (\"paciente\") + \"','\" + global.get (\"apellidos\") + \"','\" + global.get (\"edad\") + \"','\" + global.get (\"padecimientos\") + \"','\" + global.get (\"email\") + \"');\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 1060,
+        "wires": [
+            [
+                "26b92107e7af20bb",
+                "2efe71f3f4069030"
+            ]
+        ]
+    },
+    {
+        "id": "c01fc69f709c4d9e",
+        "type": "ui_button",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "group": "f0e74099d1811fac",
+        "order": 6,
+        "width": 6,
+        "height": 1,
+        "passthru": false,
+        "label": "Guardar",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 160,
+        "y": 1060,
+        "wires": [
+            [
+                "44382f909a181555"
+            ]
+        ]
+    },
+    {
+        "id": "163d7e955332674e",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Encender Alerta de toma de Medicamento",
+        "info": "",
+        "x": 220,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "9456f507cbdb7801",
+        "type": "ui_clock",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Reloj",
+        "group": "1250892ebf72c086",
+        "order": 3,
+        "width": 5,
+        "height": 3,
+        "x": 588,
+        "y": 2464,
+        "wires": []
+    },
+    {
+        "id": "12308997b9c3adee",
+        "type": "inject",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 148,
+        "y": 2464,
+        "wires": [
+            [
+                "9456f507cbdb7801",
+                "12983da5d5860235"
+            ]
+        ]
+    },
+    {
+        "id": "12983da5d5860235",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "func": "var timestamp = msg.payload;\nlet time = new Date(timestamp).toLocaleTimeString();\n\nreturn {\n payload: time\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 338,
+        "y": 2504,
+        "wires": [
+            [
+                "061148bc23153244"
+            ]
+        ]
+    },
+    {
+        "id": "061148bc23153244",
+        "type": "ui_text",
+        "z": "5b7e7e8c3aa6bde5",
+        "group": "1250892ebf72c086",
+        "order": 1,
+        "width": 5,
+        "height": 1,
+        "name": "Digital time",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "digital_time",
+        "x": 608,
+        "y": 2504,
+        "wires": []
+    },
+    {
+        "id": "a106a3c0d63dbc8a",
+        "type": "ui_template",
+        "z": "5b7e7e8c3aa6bde5",
+        "group": "7db45a2e2009a112",
+        "name": "",
+        "order": 1,
+        "width": 1,
+        "height": 1,
+        "format": "<style>\n .digital_time{\n transform:scale(2);\n }\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 138,
+        "y": 2424,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "798ab26530146104",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Mostrar el Reloj analogico",
+        "info": "",
+        "x": 188,
+        "y": 2364,
+        "wires": []
+    },
+    {
+        "id": "4f3cc4a40619e753",
+        "type": "mqtt in",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "topic": "SmartDispenser/estadoled/mqttin",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "fcb06e8f269271e9",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 560,
+        "wires": [
+            [
+                "b8e8cadd0c590954"
+            ]
+        ]
+    },
+    {
+        "id": "b8e8cadd0c590954",
+        "type": "ui_text",
+        "z": "5b7e7e8c3aa6bde5",
+        "group": "2739d27ccc7b1a26",
+        "order": 8,
+        "width": 3,
+        "height": 1,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 530,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "a4c42609b4b0a381",
+        "type": "mqtt out",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "topic": "SmartDispenser/estadoled/mqttin",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fcb06e8f269271e9",
+        "x": 560,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "a98c7fd673048772",
+        "type": "ui_button",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "group": "e97a3b2eeacbe92b",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Guardar tratamiento",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 160,
+        "y": 1360,
+        "wires": [
+            [
+                "cb5d70ce29d7f5a6"
+            ]
+        ]
+    },
+    {
+        "id": "cb5d70ce29d7f5a6",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Query guardar tratamiento",
+        "func": "msg.topic = \"INSERT INTO tratamiento (`nombre_med`,`presentacion`,`cantidad`,`horario`,`dias`) VALUES ('\" + global.get (\"medicamentos\") + \"','\" + global.get (\"presentacion\") + \"',\" + global.get (\"cantidad\") + \",'\" + global.get (\"horario\") + \"','\" + global.get (\"dias\") + \"');\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 1360,
+        "wires": [
+            [
+                "26b92107e7af20bb"
+            ]
+        ]
+    },
+    {
+        "id": "ce9f7edd64d09803",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Asegurarse de tomar el tratamiento",
+        "info": "",
+        "x": 220,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "5cd04b2a6effcb91",
+        "type": "inject",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Leer datos",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "10",
+        "topic": "",
+        "payload": "Leer",
+        "payloadType": "str",
+        "x": 130,
+        "y": 1500,
+        "wires": [
+            [
+                "fa0e7c0e2fe6d700"
+            ]
+        ]
+    },
+    {
+        "id": "fa0e7c0e2fe6d700",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Leer tratamiento",
+        "func": "msg.topic = \"Select * from tratamiento;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 1500,
+        "wires": [
+            [
+                "26b92107e7af20bb"
+            ]
+        ]
+    },
+    {
+        "id": "46ea99df38a052e8",
+        "type": "json",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 588,
+        "y": 1518,
+        "wires": [
+            [
+                "ab8bfaecf0d0ebc6",
+                "35fefacd54dcbdad"
+            ]
+        ]
+    },
+    {
+        "id": "ab8bfaecf0d0ebc6",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "tomar horario",
+        "func": "msg.payload = msg.payload[0].horario;\nglobal.set (\"varhorario\", msg.payload);\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 854,
+        "y": 1496,
+        "wires": [
+            [
+                "7b6f09533b4470e7"
+            ]
+        ]
+    },
+    {
+        "id": "2efe71f3f4069030",
+        "type": "debug",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "debug 5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "bd5aeafa237e576d",
+        "type": "ui_dropdown",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "label": "Horario",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "e97a3b2eeacbe92b",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "multiple": true,
+        "options": [
+            {
+                "label": "Mañana",
+                "value": "Mañana",
+                "type": "str"
+            },
+            {
+                "label": "Tarde",
+                "value": "Tarde",
+                "type": "str"
+            },
+            {
+                "label": "Noche",
+                "value": "Noche",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 120,
+        "y": 1280,
+        "wires": [
+            [
+                "5e18dade249a1605"
+            ]
+        ]
+    },
+    {
+        "id": "a14d57c1afe7e81c",
+        "type": "ui_dropdown",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "label": "Dias",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "e97a3b2eeacbe92b",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "multiple": true,
+        "options": [
+            {
+                "label": "Domingo",
+                "value": "Domingo",
+                "type": "str"
+            },
+            {
+                "label": "Lunes",
+                "value": "Lunes",
+                "type": "str"
+            },
+            {
+                "label": "Martes",
+                "value": "Martes",
+                "type": "str"
+            },
+            {
+                "label": "Miercóles",
+                "value": "Miercóles",
+                "type": "str"
+            },
+            {
+                "label": "Jueves",
+                "value": "Jueves",
+                "type": "str"
+            },
+            {
+                "label": "Viernes",
+                "value": "Viernes",
+                "type": "str"
+            },
+            {
+                "label": "Sabado",
+                "value": "Sábado",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 110,
+        "y": 1320,
+        "wires": [
+            [
+                "884dcf5a6ec2710d"
+            ]
+        ]
+    },
+    {
+        "id": "22bbaae3175b5f6e",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "ui-control Principal",
+        "info": "",
+        "x": 178,
+        "y": 2618,
+        "wires": []
+    },
+    {
+        "id": "e9dbde8e36108f48",
+        "type": "ui_ui_control",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "events": "all",
+        "x": 390,
+        "y": 2706,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1cdc281bc434d733",
+        "type": "ui_button",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "group": "e2a9d4b7e1a12aea",
+        "order": 1,
+        "width": 6,
+        "height": 1,
+        "passthru": false,
+        "label": "Mi perfil",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Mi Perfil\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 160,
+        "y": 2706,
+        "wires": [
+            [
+                "e9dbde8e36108f48"
+            ]
+        ]
+    },
+    {
+        "id": "de175327a8f987e6",
+        "type": "ui_button",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "group": "e2a9d4b7e1a12aea",
+        "order": 2,
+        "width": 6,
+        "height": 1,
+        "passthru": false,
+        "label": "Guardar Indices vitales",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Tratamiento médico\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 188,
+        "y": 1870,
+        "wires": [
+            [
+                "85af070a7c92e71d",
+                "9b26ba6f50430efa"
+            ]
+        ]
+    },
+    {
+        "id": "240b71f0a705eb81",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "object",
+        "info": "",
+        "x": 138,
+        "y": 2658,
+        "wires": []
+    },
+    {
+        "id": "3242b17a7940e0a0",
+        "type": "ui_led",
+        "z": "5b7e7e8c3aa6bde5",
+        "order": 1,
+        "group": "2739d27ccc7b1a26",
+        "width": 5,
+        "height": 2,
+        "label": "Confirmar toma de medicamento para apagar alerta",
+        "labelPlacement": "left",
+        "labelAlignment": "left",
+        "colorForValue": [
+            {
+                "color": "#babdb6",
+                "value": "false",
+                "valueType": "bool"
+            },
+            {
+                "color": "#ff0000",
+                "value": "true",
+                "valueType": "bool"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "circle",
+        "showGlow": true,
+        "name": "",
+        "x": 670,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "374a283aeb00e11c",
+        "type": "ui_switch",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "label": "¿Haz tomado tu medicamento?",
+        "tooltip": "",
+        "group": "2739d27ccc7b1a26",
+        "order": 6,
+        "width": 8,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "false",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "true",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 190,
+        "y": 680,
+        "wires": [
+            [
+                "08a1fc99aec581c6",
+                "3242b17a7940e0a0",
+                "a4c42609b4b0a381"
+            ]
+        ]
+    },
+    {
+        "id": "b400b7edce3910d4",
+        "type": "ui_text",
+        "z": "5b7e7e8c3aa6bde5",
+        "group": "2739d27ccc7b1a26",
+        "order": 5,
+        "width": 5,
+        "height": 1,
+        "name": "",
+        "label": "NO                -            SI",
+        "format": "{{msg.payload}}",
+        "layout": "row-right",
+        "className": "",
+        "x": 180,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "35fefacd54dcbdad",
+        "type": "ui_table",
+        "z": "5b7e7e8c3aa6bde5",
+        "group": "2fffcf9c8904ffc6",
+        "name": "Medicamentos",
+        "order": 1,
+        "width": 12,
+        "height": 1,
+        "columns": [
+            {
+                "field": "nombre_med",
+                "title": "Medicamentos",
+                "width": "160",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "presentacion",
+                "title": "Presentacion",
+                "width": "160",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "cantidad",
+                "title": "Cantidad",
+                "width": "100",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "horario",
+                "title": "Horario",
+                "width": "100",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "dias",
+                "title": "Dias",
+                "width": "160",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
+        "outputs": 0,
+        "cts": false,
+        "x": 734,
+        "y": 1716,
+        "wires": []
+    },
+    {
+        "id": "728e2f2ccbe36008",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Muestra en una Tabla el tratamiento médico >>",
+        "info": "",
+        "x": 444,
+        "y": 1716,
+        "wires": []
+    },
+    {
+        "id": "fd11ad1788b5dc49",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "ui-control Ver tratamiento dado de alta",
+        "info": "",
+        "x": 224,
+        "y": 3036,
+        "wires": []
+    },
+    {
+        "id": "b2e188dc8ceae22e",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Ingresar Datos Personales",
+        "info": "",
+        "x": 190,
+        "y": 2780,
+        "wires": []
+    },
+    {
+        "id": "bd6ca91a453f7902",
+        "type": "ui_ui_control",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "events": "all",
+        "x": 534,
+        "y": 3096,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "26a9383da26359c7",
+        "type": "ui_ui_control",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "events": "all",
+        "x": 400,
+        "y": 2820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0771a60d9f287de3",
+        "type": "ui_button",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "group": "604efd9503aadb82",
+        "order": 1,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "label": "<< Regresar",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Dispensador Inteligente\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 170,
+        "y": 2820,
+        "wires": [
+            [
+                "26a9383da26359c7"
+            ]
+        ]
+    },
+    {
+        "id": "cfed58e9615ad9a5",
+        "type": "ui_text_input",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "label": "Apellidos",
+        "tooltip": "",
+        "group": "f0e74099d1811fac",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "text",
+        "delay": 300,
+        "topic": "topic",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 120,
+        "y": 880,
+        "wires": [
+            [
+                "a6bba80392746b5d"
+            ]
+        ]
+    },
+    {
+        "id": "a6bba80392746b5d",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Apellidos",
+        "func": "global.set(\"apellidos\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c859751e2012e658",
+        "type": "ui_button",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "group": "7c965532f3fd5212",
+        "order": 1,
+        "width": 6,
+        "height": 1,
+        "passthru": false,
+        "label": "¿Deseas Ingresar un nuevo tratamiento?",
+        "tooltip": "",
+        "color": "Blue",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Ingresar tratamiento médico\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 194,
+        "y": 3096,
+        "wires": [
+            [
+                "bd6ca91a453f7902"
+            ]
+        ]
+    },
+    {
+        "id": "4f113ae8e1a4c9d0",
+        "type": "ui_ui_control",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "events": "all",
+        "x": 320,
+        "y": 2940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8462d00b7cc36d9d",
+        "type": "ui_button",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "group": "f2e9cf1ff692b807",
+        "order": 1,
+        "width": 5,
+        "height": 1,
+        "passthru": false,
+        "label": "<< Regresar",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Dispensador Inteligente\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 150,
+        "y": 2940,
+        "wires": [
+            [
+                "4f113ae8e1a4c9d0"
+            ]
+        ]
+    },
+    {
+        "id": "4df38253f3a67121",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Ingresar Tratamiento médico",
+        "info": "",
+        "x": 200,
+        "y": 2900,
+        "wires": []
+    },
+    {
+        "id": "81ceba3f48dd8835",
+        "type": "ui_button",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "group": "7c965532f3fd5212",
+        "order": 2,
+        "width": 6,
+        "height": 1,
+        "passthru": false,
+        "label": "Ver estadisticas y valoraciones",
+        "tooltip": "",
+        "color": "Blue",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Estadisticas\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 304,
+        "y": 3136,
+        "wires": [
+            [
+                "bd6ca91a453f7902"
+            ]
+        ]
+    },
+    {
+        "id": "1834770993bc5bf9",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Guardar Indices Vitales y notificar a donde debe ir si desea ver sus indices y valoraciones",
+        "info": "",
+        "x": 388,
+        "y": 1804,
+        "wires": []
+    },
+    {
+        "id": "afb7716565213963",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Query guardar indices",
+        "func": "msg.topic = \"INSERT INTO indvital (`temp`,`bpm`,`sp02`,`pseudodiagnostico`) VALUES (\" + global.get (\"temp\") + \",\" + global.get (\"bpm\") + \",\" + global.get (\"sp02\") + \",'\" + global.get(\"pseudodiagnostico\") + \"');\";                                     \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 748,
+        "y": 1870,
+        "wires": [
+            [
+                "26b92107e7af20bb"
+            ]
+        ]
+    },
+    {
+        "id": "85af070a7c92e71d",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Verificacion de arritmias",
+        "func": "if(global.get(\"bpm\") >= 55){\n    msg.payload = \"Si no estas en estado pasivo, revisa tu presión\";\n    global.set (\"pseudodiagnostico\", msg.payload);\n    return msg;\n}\nif(global.get(\"bpm\") >= 100 && global.get(\"temp\") < 37.0 && global.get (\"sp02\") < 90){\n    msg.payload = \"Respira profundo, es posible que te hayas estresado\";\n    global.set (\"pseudodiagnostico\", msg.payload);\n    return msg;\n}\nif(global.get(\"bpm\") < 55 && global.get (\"sp02\") < 80){\n    msg.payload = \"Si tienes mareos, cansancio extremos revisa con tu medioo de posible bradicardias o revisar funcionamiento de marcapasos\";\n    global.set (\"pseudodiagnostico\", msg.payload);\n    return msg;\n}\nif(global.get(\"bpm\") >= 59 && global.get (\"sp02\") > 90 && global.get(\"temp\") >= 36.5){\n    msg.payload = \"Indices normales\";\n    global.set (\"pseudodiagnostico\", msg.payload);\n    return msg;\n}\nif(global.get(\"temp\") >= 36 && global.get(\"sp02\") >= 89){\n    msg.payload = \"Indices normales\";\n    global.set (\"pseudodiagnostico\", msg.payload);\n    return msg;\n}\nif(global.get(\"temp\") < 35 && global.get(\"sp02\") >= 80){\n    msg.payload = \"Entraraás en hipotermia si no te abrigas\";\n    global.set (\"pseudodiagnostico\", msg.payload);\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 1870,
+        "wires": [
+            [
+                "afb7716565213963"
+            ]
+        ]
+    },
+    {
+        "id": "cda5904ad36d871d",
+        "type": "debug",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 874,
+        "y": 1936,
+        "wires": []
+    },
+    {
+        "id": "823d306ce53d73ad",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Estadisticas de signos vitales ",
+        "info": "",
+        "x": 198,
+        "y": 1980,
+        "wires": []
+    },
+    {
+        "id": "7731520150dc2ab1",
+        "type": "ui_button",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "group": "e3c62cccf755a4ca",
+        "order": 2,
+        "width": 11,
+        "height": 1,
+        "passthru": false,
+        "label": "Generar",
+        "tooltip": "",
+        "color": "White",
+        "bgcolor": "Blue",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 126,
+        "y": 2046,
+        "wires": [
+            [
+                "53e6824e8d818834"
+            ]
+        ]
+    },
+    {
+        "id": "7cae69e58260c035",
+        "type": "ui_ui_control",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "events": "all",
+        "x": 402,
+        "y": 3234,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2ff12dad9bf6912c",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Control Estadisticas",
+        "info": "",
+        "x": 158,
+        "y": 3190,
+        "wires": []
+    },
+    {
+        "id": "cd287479787f9ca4",
+        "type": "ui_button",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "group": "1bf667d199aae9e5",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "<< Regresar",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "{\"tab\":\"Dispensador Inteligente\"}",
+        "payloadType": "json",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 202,
+        "y": 3234,
+        "wires": [
+            [
+                "7cae69e58260c035"
+            ]
+        ]
+    },
+    {
+        "id": "53e6824e8d818834",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Leer indices vitales",
+        "func": "msg.topic = \"Select * from indvital;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 222,
+        "y": 2112,
+        "wires": [
+            [
+                "f7974c816bba4927"
+            ]
+        ]
+    },
+    {
+        "id": "f7974c816bba4927",
+        "type": "mysql",
+        "z": "5b7e7e8c3aa6bde5",
+        "mydb": "8d3edaa2d96de089",
+        "name": "",
+        "x": 450,
+        "y": 2112,
+        "wires": [
+            [
+                "727858aabe52216d"
+            ]
+        ]
+    },
+    {
+        "id": "727858aabe52216d",
+        "type": "json",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 644,
+        "y": 2112,
+        "wires": [
+            [
+                "f6cc8df1db745fa3",
+                "e44e17b1eefb2494"
+            ]
+        ]
+    },
+    {
+        "id": "f6cc8df1db745fa3",
+        "type": "ui_table",
+        "z": "5b7e7e8c3aa6bde5",
+        "group": "e3c62cccf755a4ca",
+        "name": "Indices vitales y posibles valoraciones",
+        "order": 4,
+        "width": 16,
+        "height": 4,
+        "columns": [
+            {
+                "field": "id",
+                "title": "Num",
+                "width": "40",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "fecha_reg",
+                "title": "Se genero en:",
+                "width": "160",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "temp",
+                "title": "Temperatura corporal",
+                "width": "160",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "bpm",
+                "title": "Latidos x min",
+                "width": "150",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "sp02",
+                "title": "Oxigenación",
+                "width": "120",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            },
+            {
+                "field": "pseudodiagnostico",
+                "title": "Valoraciones",
+                "width": "200",
+                "align": "left",
+                "formatter": "plaintext",
+                "formatterParams": {
+                    "target": "_blank"
+                }
+            }
+        ],
+        "outputs": 0,
+        "cts": false,
+        "x": 832,
+        "y": 2178,
+        "wires": []
+    },
+    {
+        "id": "361a60caa21c6c86",
+        "type": "ui_template",
+        "z": "5b7e7e8c3aa6bde5",
+        "group": "814ccfe36d689971",
+        "name": "Histograma",
+        "order": 1,
+        "width": 12,
+        "height": 5,
+        "format": "<iframe src=\"http://localhost:3000/d-solo/w_oqvBTVz/home?from=1674381610713&to=1674554410713&orgId=1&panelId=123127\" width=\"1150\" height=\"200\" frameborder=\"0\"></iframe>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 158,
+        "y": 3476,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d4937186d3b8afec",
+        "type": "ui_template",
+        "z": "5b7e7e8c3aa6bde5",
+        "group": "f84ec4c697300854",
+        "name": "Pulso mayor a 55 bpm",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<iframe src=\"http://localhost:3000/d-solo/w_oqvBTVz/home?from=1674512715073&to=1674555915073&var-symbol=&orgId=1&panelId=123129\" width=\"850\" height=\"200\" frameborder=\"0\"></iframe>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 188,
+        "y": 3564,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1fe8ac1afbf0404c",
+        "type": "inject",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "60",
+        "topic": "",
+        "payload": "Leer Perfil",
+        "payloadType": "str",
+        "x": 106,
+        "y": 2244,
+        "wires": [
+            [
+                "675c976a435e8e48"
+            ]
+        ]
+    },
+    {
+        "id": "675c976a435e8e48",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Leer Mi Perfil",
+        "func": "msg.topic = \"Select * from infoper;\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 282,
+        "y": 2244,
+        "wires": [
+            [
+                "07aeba7ca7549e73"
+            ]
+        ]
+    },
+    {
+        "id": "b8028cae4b5a9f2a",
+        "type": "ui_table",
+        "z": "5b7e7e8c3aa6bde5",
+        "group": "5ff1cd366cca3859",
+        "name": "Datos personales",
+        "order": 1,
+        "width": 16,
+        "height": 3,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 728,
+        "y": 2244,
+        "wires": []
+    },
+    {
+        "id": "e44e17b1eefb2494",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Obtener nombre",
+        "func": "msg.payload = msg.payload[0].nombre;\nglobal.set (\"nompaciente\", msg.payload);\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 668,
+        "y": 1980,
+        "wires": [
+            [
+                "cda5904ad36d871d",
+                "772dfb62c742b0b7"
+            ]
+        ]
+    },
+    {
+        "id": "66dc7053914a287c",
+        "type": "comment",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Saludo Usuario",
+        "info": "",
+        "x": 624,
+        "y": 1936,
+        "wires": []
+    },
+    {
+        "id": "772dfb62c742b0b7",
+        "type": "ui_audio",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "",
+        "group": "2739d27ccc7b1a26",
+        "voice": "urn:moz-tts:speechd:Spanish%20(Latin%20America)?es",
+        "always": "",
+        "x": 864,
+        "y": 2002,
+        "wires": []
+    },
+    {
+        "id": "07aeba7ca7549e73",
+        "type": "mysql",
+        "z": "5b7e7e8c3aa6bde5",
+        "mydb": "8d3edaa2d96de089",
+        "name": "",
+        "x": 496,
+        "y": 2244,
+        "wires": [
+            [
+                "b8028cae4b5a9f2a"
+            ]
+        ]
+    },
+    {
+        "id": "31a90aa93779722d",
+        "type": "function",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "Verificar ambiente del Dispensador",
+        "func": "if(global.get(\"tempSD\") < 25 && global.get(\"humSD\") < 40){\n    msg.payload = \"Indices adecuados\";\n    global.set (\"valoracionamb\", msg.payload);\n    return msg;\n}\nif(global.get(\"tempSD\") >= 25){\n    msg.payload = \"Temperatura alta para Dispensador, se sugiere ventilar habitación\";\n    global.set (\"valoracionamb\", msg.payload);\n    return msg;\n}\nif(global.get(\"humSD\") >= 40){\n    msg.payload = \"Indice de humedad alta, se sugiere ventilar habitación\";\n    global.set (\"valoracionamb\", msg.payload);\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 778,
+        "y": 220,
+        "wires": [
+            [
+                "d9f20a56c49e797e"
+            ]
+        ]
+    },
+    {
+        "id": "d9f20a56c49e797e",
+        "type": "ui_text",
+        "z": "5b7e7e8c3aa6bde5",
+        "group": "1250892ebf72c086",
+        "order": 8,
+        "width": 4,
+        "height": 1,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "col-center",
+        "className": "",
+        "x": 883,
+        "y": 286,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "48a0ada007867220",
+        "type": "debug",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 242,
+        "wires": []
+    },
+    {
+        "id": "7b6f09533b4470e7",
+        "type": "debug",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 996,
+        "y": 1562,
+        "wires": []
+    },
+    {
+        "id": "9b26ba6f50430efa",
+        "type": "ui_toast",
+        "z": "5b7e7e8c3aa6bde5",
+        "position": "dialog",
+        "displayTime": "3",
+        "highlight": "yellow",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "raw": true,
+        "className": "",
+        "topic": "¡Listo!, podrás consultar tus indices dando clic en \"Ver Estadísticas y valoraciones\"",
+        "name": "",
+        "x": 400,
+        "y": 1914,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d4e6b18fa6ebb3d0",
+        "type": "ui_spacer",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "spacer",
+        "group": "e97a3b2eeacbe92b",
+        "order": 2,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "e4a273daeebf2581",
+        "type": "ui_spacer",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "spacer",
+        "group": "e97a3b2eeacbe92b",
+        "order": 4,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "eda57236293af84a",
+        "type": "ui_spacer",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "spacer",
+        "group": "e97a3b2eeacbe92b",
+        "order": 6,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "412cd3a7a1110b50",
+        "type": "ui_spacer",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "spacer",
+        "group": "e3c62cccf755a4ca",
+        "order": 1,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "9c5589e6f7e2e655",
+        "type": "ui_spacer",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "spacer",
+        "group": "e3c62cccf755a4ca",
+        "order": 3,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "eac2792f40a193a2",
+        "type": "ui_spacer",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "spacer",
+        "group": "1250892ebf72c086",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "9d9ee4dd92dfa285",
+        "type": "ui_spacer",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "spacer",
+        "group": "1250892ebf72c086",
+        "order": 7,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "db1d46b7c7fdbf60",
+        "type": "ui_spacer",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "spacer",
+        "group": "2739d27ccc7b1a26",
+        "order": 2,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "1b3220160f7b8c30",
+        "type": "ui_spacer",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "spacer",
+        "group": "2739d27ccc7b1a26",
+        "order": 3,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "1f9170d49621e193",
+        "type": "ui_spacer",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "spacer",
+        "group": "2739d27ccc7b1a26",
+        "order": 4,
+        "width": 3,
+        "height": 1
+    },
+    {
+        "id": "50c4f34b878bc87a",
+        "type": "ui_spacer",
+        "z": "5b7e7e8c3aa6bde5",
+        "name": "spacer",
+        "group": "2739d27ccc7b1a26",
+        "order": 9,
+        "width": 5,
+        "height": 1
+    },
+    {
+        "id": "fcb06e8f269271e9",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "1250892ebf72c086",
+        "type": "ui_group",
+        "name": "Estado del SmartDispenser",
+        "tab": "58ddbe96aba7a8fc",
+        "order": 1,
+        "disp": true,
+        "width": 9,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "bcd3ae9b12fd9abf",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "9f99164f1a81d407",
+        "type": "ui_group",
+        "name": "Checar tus indices vitales",
+        "tab": "58ddbe96aba7a8fc",
+        "order": 3,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f0e74099d1811fac",
+        "type": "ui_group",
+        "name": "Ingresar Información Personal",
+        "tab": "250228029eb2aa23",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e97a3b2eeacbe92b",
+        "type": "ui_group",
+        "name": "Ingresar datos de tu Tratamiento",
+        "tab": "abecd5aec05195ad",
+        "order": 1,
+        "disp": true,
+        "width": 7,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2739d27ccc7b1a26",
+        "type": "ui_group",
+        "name": "Alerta Toma de medicamento",
+        "tab": "58ddbe96aba7a8fc",
+        "order": 5,
+        "disp": true,
+        "width": 8,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "8d3edaa2d96de089",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "DataSmartDispenser",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "7db45a2e2009a112",
+        "type": "ui_group",
+        "name": "",
+        "tab": "eb94216d.968598",
+        "order": 1,
+        "disp": true,
+        "width": 18,
+        "collapse": false,
+        "className": "clock"
+    },
+    {
+        "id": "e2a9d4b7e1a12aea",
+        "type": "ui_group",
+        "name": "Control Principal",
+        "tab": "58ddbe96aba7a8fc",
+        "order": 2,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2fffcf9c8904ffc6",
+        "type": "ui_group",
+        "name": "Mi tratamiento médico",
+        "tab": "58ddbe96aba7a8fc",
+        "order": 4,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "604efd9503aadb82",
+        "type": "ui_group",
+        "name": "Control",
+        "tab": "250228029eb2aa23",
+        "order": 3,
+        "disp": true,
+        "width": 5,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7c965532f3fd5212",
+        "type": "ui_group",
+        "name": "Control Tratamiento",
+        "tab": "58ddbe96aba7a8fc",
+        "order": 6,
+        "disp": true,
+        "width": "12",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f2e9cf1ff692b807",
+        "type": "ui_group",
+        "name": "Control",
+        "tab": "abecd5aec05195ad",
+        "order": 2,
+        "disp": true,
+        "width": 5,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e3c62cccf755a4ca",
+        "type": "ui_group",
+        "name": "Genera estadisticas",
+        "tab": "a891a42968efbdce",
+        "order": 1,
+        "disp": true,
+        "width": 16,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1bf667d199aae9e5",
+        "type": "ui_group",
+        "name": "Control",
+        "tab": "a891a42968efbdce",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "814ccfe36d689971",
+        "type": "ui_group",
+        "name": "Grafana",
+        "tab": "a891a42968efbdce",
+        "order": 3,
+        "disp": true,
+        "width": 12,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "f84ec4c697300854",
+        "type": "ui_group",
+        "name": "Grafana Pulso",
+        "tab": "a891a42968efbdce",
+        "order": 4,
+        "disp": true,
+        "width": 8,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "5ff1cd366cca3859",
+        "type": "ui_group",
+        "name": "Mi datos",
+        "tab": "250228029eb2aa23",
+        "order": 2,
+        "disp": true,
+        "width": 16,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "58ddbe96aba7a8fc",
+        "type": "ui_tab",
+        "name": "Dispensador Inteligente",
+        "icon": "dashboard",
+        "order": 10,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "250228029eb2aa23",
+        "type": "ui_tab",
+        "name": "Mi Perfil",
+        "icon": "dashboard",
+        "order": 11,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "abecd5aec05195ad",
+        "type": "ui_tab",
+        "name": "Ingresar tratamiento médico",
+        "icon": "dashboard",
+        "order": 12,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "eb94216d.968598",
+        "type": "ui_tab",
+        "d": true,
+        "name": "Industrial Shields",
+        "icon": "",
+        "order": 8,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "a891a42968efbdce",
+        "type": "ui_tab",
+        "name": "Estadisticas",
+        "icon": "dashboard",
+        "order": 12,
+        "disabled": false,
+        "hidden": false
+    }
+]
