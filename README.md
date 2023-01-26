@@ -36,7 +36,7 @@ La aplicación del Dispensador médico se visualiza en un flow de Node-red que r
 ## **Descripción de la Aplicación**
 
 
-![Diagrama del CI](https://github.com/LauraBalandran/DetectorDeSintomasCOVID/blob/main/Imagenes/Diagrama%20del%20circuto%20pulsoximetro-temperatura.png)
+![Diagrama del CI](https://github.com/LauraBalandran/CAPSTONE-PROJECT-2022/blob/main/Diagrama%20de%20Circuito/Circuito%20digital%20Smart%20Dispenser.png)
 
 
 ![Circuito de los sensores MLX90614 y MAX30102](https://github.com/LauraBalandran/DetectorDeSintomasCOVID/blob/main/Imagenes/circuito%20sensor%20MLX90614%20y%20MAX30102.jpg)
