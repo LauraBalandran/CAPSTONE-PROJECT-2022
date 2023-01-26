@@ -38,46 +38,53 @@ La aplicación del Dispensador médico se visualiza en un flow de Node-red que r
 
 ![Diagrama del CI](https://github.com/LauraBalandran/CAPSTONE-PROJECT-2022/blob/main/Diagrama%20de%20Circuito/Circuito%20digital%20Smart%20Dispenser.png)
 
+![Acomodamiento del Circuito ](https://github.com/LauraBalandran/CAPSTONE-PROJECT-2022/blob/main/imgs%20readme/inserci%C3%B3n%20del%20circuito.jpeg)
 
-![Circuito de los sensores MLX90614 y MAX30102](https://github.com/LauraBalandran/DetectorDeSintomasCOVID/blob/main/Imagenes/circuito%20sensor%20MLX90614%20y%20MAX30102.jpg)
+![Circuito de los sensores MLX90614, MAX30102, DHT11 ](https://github.com/LauraBalandran/CAPSTONE-PROJECT-2022/blob/main/imgs%20readme/Primera%20forma%20del%20Dispensador.jpeg)
 
-Valores recibidos en terminal Ubuntu con la subscripción al tema codigoIoT/detectorSintomas/flow
-
-![valores por mqtt en la terminal de ubuntu](https://github.com/LauraBalandran/DetectorDeSintomasCOVID/blob/main/Imagenes/valores%20por%20mqtt.png)
-
-![nodo mqtt de Node-red](https://github.com/LauraBalandran/DetectorDeSintomasCOVID/blob/main/Imagenes/nodo%20mqtt.png)
+![Circuito insertado dentro del Dispensador](https://github.com/LauraBalandran/CAPSTONE-PROJECT-2022/blob/main/imgs%20readme/circuito%20insertado%20dentro%20del%20Dispensador.jpg)
 
 
-Posteriormente toma los valores para mostrarlos en las gráficas mostradas en el Dashboard, donde también se solicita los datos del paciente, los guarda en variables globales para luego enviarlos y almacenarlos en una BD de Mysql llamada “detectorsintomas” en una tabla llamada “registro”.
-![Dashboard de la aplicación](https://github.com/LauraBalandran/DetectorDeSintomasCOVID/blob/main/Imagenes/DashboardDetectorSintomasCOVID.jpeg)
+Interfaz principal del SmartDispenser en Dashboard de Node Red 
+
+Mostrando un reloj para recordar la hora, botones principales para dar de alta su perfil o guardar los indices vitales de pulso, oxigenación y temperatura, tambíen se muestra la
+tabla de tratamiento, y puede dar de alta uno nuevo o revisar las estadisticas con las valoraciones acerca de los indices vitales tomados.
+
+![Menu Principal](https://github.com/LauraBalandran/CAPSTONE-PROJECT-2022/blob/main/Imagenes%20Proyecto/NodeRed/1_Interfaz%20gr%C3%A1fica%20principal.png)
+
+Conjunto de nodo en Node Red que hacen posible la lectura de los datos del ambiente dentro del dispensador
+
+![MQTT](https://github.com/LauraBalandran/CAPSTONE-PROJECT-2022/blob/main/imgs%20readme/mqtt%20estado%20smartdispenser.png)
 
 
-![Datos almacenados en la BD](https://github.com/LauraBalandran/DetectorDeSintomasCOVID/blob/main/Imagenes/datos%20en%20la%20BD.png)
+Tabla que muestra el registro de los indices guardados y las valoraciones sobre su estado de salud (las valoraciones pueden ser supuestas solo para que este en observación de 
+su salud).
+
+![Dashboard de Valoraciones](https://github.com/LauraBalandran/CAPSTONE-PROJECT-2022/blob/main/Imagenes%20Proyecto/NodeRed/5_Estadisticas%20y%20Valoraciones%20de%20los%20indices%20vitales.png)
+
+Base de datos llamada SmartDispenserData para guardar los datos e indices vitales del propietario del SmartDispenser
+
+![Base de Datos DataSmartDispenser](https://github.com/LauraBalandran/CAPSTONE-PROJECT-2022/blob/main/imgs%20readme/tablas%20de%20la%20base%20de%20datos%20del%20SD.png)
 
 
-Al oprimir un botón llamado “Realizar diagnostico”, una función compara los valores para emitir un proto diagnóstico emitido en audio y enviar este último valor por correo electrónico.
+Si los indices climaticos dentro del Dispensador son inadecuados, emitirá una alerta para ventilar la habitación y informará acerca de los rangos adecuados.
 
-![correo recibido](https://github.com/LauraBalandran/DetectorDeSintomasCOVID/blob/main/Imagenes/nodo%20boton.png)
+![Alerta de indices ambientales dentro del dispensador](https://github.com/LauraBalandran/CAPSTONE-PROJECT-2022/blob/main/Imagenes%20Proyecto/NodeRed/6_Reloj%20Indices%20Altos%20del%20SmartDispenser.png)
 
-![enter image description here](https://github.com/LauraBalandran/DetectorDeSintomasCOVID/blob/main/Imagenes/correo%20recibido.png)
+Al guardar los indices vitales para revisión y valoración, emite un saludo (con la finalidad de revisar estado de animo del paciente).
 
-![Abrir correo con el proto diagnóstico](https://github.com/LauraBalandran/DetectorDeSintomasCOVID/blob/main/Imagenes/ver%20correo.png)
+![Saludo](https://github.com/LauraBalandran/CAPSTONE-PROJECT-2022/blob/main/Imagenes%20Proyecto/NodeRed/Notificaci%C3%B3n%20para%20consulta%20de%20estadisticas.png)
 
 
-En el programa de la IDE de arduino  realiza una conexión a internet por wifi, para enviar un json por mqtt al tema codigoIoT/detectorSintomas/flow
-[Programa que realiza la lectura de los valores de los sensores mencionados](https://github.com/LauraBalandran/DetectorDeSintomasCOVID/tree/main/ESP32CAM/ESP32CAM-JSON-MQTT-MLX90614-MAX30102)
+En el programa de la IDE de arduino  realiza una conexión a internet por wifi, para enviar un json por mqtt al tema SmartDispenser/envio/mqtt
+[Programa que realiza la lectura de los valores de los sensores mencionados](https://github.com/LauraBalandran/CAPSTONE-PROJECT-2022/blob/main/imgs%20readme/ino%20arduino.png)
 
 
 
 ## **Vistas previas y vídeos de los resultados**
 
-[Vista video Tiktok](https://vm.tiktok.com/ZMNEqkYQk/) Funcionamiento de la aplicación Detector de Sintomas Covid.
+[Vista video Tiktok](https://vm.tiktok.com/ZMY8SANQy/) Funcionamiento de la aplicación SmartDispenser.
 
-[Vista video Youtube](https://youtu.be/E8k-flcJAIE)
-![](https://youtu.be/E8k-flcJAIE) Funcionamiento de la aplicación en el dashboard Node-red.
-
-[Vista video2 Youtube](https://youtu.be/UWlHNyCOzPU)
-![](https://youtu.be/UWlHNyCOzPU) Funcionamiento de la aplicación dashboard Node-red, vista datos en la BD.
 
 **Hashtags**
   
@@ -87,7 +94,9 @@ En el programa de la IDE de arduino  realiza una conexión a internet por wifi, 
   #IoT
   #NodeRed
   #ESP32CAM
-  #DetectorSintomasCovid
+  #SmartDispenser
   #MAX30102
   #MLX90614
+  #DHT11
+
  
